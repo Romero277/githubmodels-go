@@ -1,0 +1,28 @@
+# Binaries
+/bin/
+/*.exe
+/*.exe~
+/*.dll
+/*.so
+/*.dylib
+
+# Build output
+/build/
+/out/
+
+# Vendor directory (optional, if you use Go modules you may not need this)
+vendor/
+
+# Editor files
+*.swp
+*.swo
+*.idea/
+*.vscode/
+*.DS_Store
+
+# Test output
+*.test
+coverage.out
+
+# Go dependency files (do NOT ignore go.mod or go.sum)
+# go.sum should be committed, go.mod too
