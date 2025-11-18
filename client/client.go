@@ -22,7 +22,7 @@ func NewClient(token string) *Client {
 	return &Client{
 		token:   token,
 		Client:  http.DefaultClient,
-		BaseURL: "https://api.github.ai", // production default
+		BaseURL: "https://models.github.ai", // production default
 	}
 }
 
