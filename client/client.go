@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"strconv"
 
 	"github.com/tigillo/githubmodels-go/models"
 )
@@ -94,4 +95,35 @@ func (c *Client) ChatCompletion(ctx context.Context, reqData models.ChatRequest)
 	}
 
 	return &chatResp, nil
+}
+
+// ParseRateLimitHeaders extracts rate limit information from HTTP headers
+func ParseRateLimitHeaders(headers http.Header) models.RateLimitInfo {
+	info := models.RateLimitInfo{}
+
+	if limit := headers.Get("X-RateLimit-Limit"); limit != "" {
+		if val, err := strconv.Atoi(limit); err == nil {
+			info.Limit = val
+		}
+	}
+
+	if remaining := headers.Get("X-RateLimit-Remaining"); remaining != "" {
+		if val, err := strconv.Atoi(remaining); err == nil {
+			info.Remaining = val
+		}
+	}
+
+	if reset := headers.Get("X-RateLimit-Reset"); reset != "" {
+		if val, err := strconv.ParseInt(reset, 10, 64); err == nil {
+			info.Reset = val
+		}
+	}
+
+	if retryAfter := headers.Get("Retry-After"); retryAfter != "" {
+		if val, err := strconv.Atoi(retryAfter); err == nil {
+			info.RetryAfter = val
+		}
+	}
+
+	return info
 }

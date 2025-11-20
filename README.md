@@ -11,6 +11,8 @@ It allows you to list models, perform chat/inference completions, and supports s
 
 - List available models in the GitHub Models catalog
 - Create chat completions (like OpenAI’s `ChatCompletion`)
+- Rate limit tracking (headers parsed automatically)
+- Token usage tracking (prompt, completion, total)
 - Optional streaming support for real-time responses
 - Supports organization-scoped endpoints
 - Easy-to-use Go client interface
@@ -25,15 +27,17 @@ go get github.com/tigillo/githubmodels-go
 
 ## Usage
 ### Initialize Client
-```
+```go
 package main
 
 import (
     "context"
     "fmt"
     "os"
+    "time"
 
     githubmodels "github.com/tigillo/githubmodels-go/client"
+    "github.com/tigillo/githubmodels-go/models"
 )
 
 func main() {
@@ -43,30 +47,41 @@ func main() {
     ctx := context.Background()
     
     // Example: list models
-    models, err := client.ListModels(ctx)
+    modelsList, err := client.ListModels(ctx)
     if err != nil {
         panic(err)
     }
 
-    for _, m := range models {
+    for _, m := range modelsList {
         fmt.Println(m.ID, "-", m.Description)
     }
 }
 ```
 
 ### Create Chat Completion
-```
-resp, err := client.ChatCompletion(ctx, githubmodels.ChatRequest{
+```go
+resp, err := client.ChatCompletion(ctx, models.ChatRequest{
     Model: "github/code-chat",
-    Messages: []githubmodels.Message{
+    Messages: []models.Message{
         {Role: "user", Content: "Write a Go function to reverse a string"},
     },
 })
+
+// Check for rate limit info even on error
+if resp != nil && resp.RateLimit.Limit > 0 {
+    fmt.Printf("Rate Limit: %d/%d remaining\n", resp.RateLimit.Remaining, resp.RateLimit.Limit)
+    fmt.Printf("Resets at: %s\n", time.Unix(resp.RateLimit.Reset, 0))
+}
+
 if err != nil {
     panic(err)
 }
 
 fmt.Println(resp.Choices[0].Message.Content)
+
+// Check token usage
+fmt.Printf("Token Usage: %d prompt + %d completion = %d total\n",
+    resp.Usage.PromptTokens, resp.Usage.CompletionTokens, resp.Usage.TotalTokens)
 ```
 
 ## Environment Variables
